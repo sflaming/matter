@@ -4,18 +4,10 @@ borderize is a script that adds matting (a border) to images, which makes them f
 ## Right??
 ![2021_11_22_20211030_DSCF7297__35_borderized_match](https://user-images.githubusercontent.com/17396560/163601446-a7e5ff05-a8fe-4e1b-a505-bccffcff50d3.jpg)
 
-## Actions
-The script runs on all `.jpg` and `.JPG` files in the folder and deposits the new images in a `borderized/` folder. 
+## Requirements
+- `sips`
 
-For landscape-oriented images, the top- and bottom-borders are set to 1.3 times the height, and the left- and right-borders are width 1.07 times the width. The top and bottom borders are wider than the side borders.
-
-For portrait-oriented images, the top- and bottom-borders are set to 1.07 times the height, and the left- and right-borders are width 1.3 times the width. The side borders are wider than the top borders.
-
-For square images, all borders are set to 1.07 times the height.
-
-The default mat colour is `#FFFFFF` white; a number of other options exist.
-
-## Run borderize
+## How to use it
 1. Add `borderize.sh` to a folder in your `$PATH`
 2. `cd` to a folder with images to borderize
 3. `bordersize.sh` to borderize with the default colour, or add an available colour to the command.
@@ -25,7 +17,18 @@ For example,
 $ borderize.sh mintcream
 ```
 
-The currently available colours are:
+## Actions
+The script uses [`sips`](https://ss64.com/osx/sips.html). It runs on all `.jpg` and `.JPG` files in the folder and deposits the new images in a `borderized/` folder. They new images are named `{originalFileName}_borderized_optionalMatColour.jpg`. The original images are not deleted.
+
+For landscape-oriented images, the top- and bottom-borders are set to 15% of the height of the original (the new height is set to 1.3 times the original height), and the left- and right-borders are set to 3.5% of the height of the original (the new width is set to 1.07 times the original width). The top and bottom borders are wider than the side borders.
+
+For portrait-oriented images, the top- and bottom-borders are set to 3.5% of the height of the original (the new height is set to 1.07 times the original height). The left- and right-borders are set to 15% of the width of the original (the new width is to 1.3 times the original width). The side borders are wider than the top borders.
+
+For square images, all borders are set to 3.5% of the height of the original.
+
+The default mat colour is `#FFFFFF` white; a number of other options exist.
+
+## Colours
 ```
 [aliceblue]="f0f8ff"
 [antiquewhite]="faebd7"
@@ -33,7 +36,6 @@ The currently available colours are:
 [aquamarine]="7fffd4"
 [azure]="f0ffff"
 [beige]="f5f5dc"
-
 [bisque]="ffe4c4"
 [black]="000000"
 [blanchedalmond]="ffebcd"
@@ -176,7 +178,6 @@ The currently available colours are:
 [whitesmoke]="f5f5f5"
 [yellow]="ffff00"
 [yellowgreen]="9acd32"
-
 ["dark"]r="121212"
 ["pale"]r="F8EDEB"
 ["mint"]r="D8E2DC"
@@ -187,7 +188,7 @@ The currently available colours are:
 ["greyn"]r="B7B7A4"
 ```
 
-Two additional options exist, which extract a colour from the image in slightly different ways. Experiment to see which works best for your image.:
+Two additional options exist, which extract a colour from the image in slightly different ways. Experiment to see which works best for your image. The sample image was generated using `dom`:
 ```
 ["dom"]
 ["match"]
