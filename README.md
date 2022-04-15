@@ -1,6 +1,7 @@
 # borderize 
 borderize is a script that adds matting (a border) to images, which makes them fancy 💁‍♂️.
 
+## Right??
 ![2021_11_22_20211030_DSCF7297__35_borderized_match](https://user-images.githubusercontent.com/17396560/163601446-a7e5ff05-a8fe-4e1b-a505-bccffcff50d3.jpg)
 
 ## Actions
@@ -191,3 +192,5 @@ Two additional options exist, which extract a colour from the image in slightly 
 ["dom"]
 ["match"]
 ```
+
+Sample image ©2022 Symon Flaming
