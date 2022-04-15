@@ -18,7 +18,7 @@ $ borderize.sh mintcream
 ```
 
 ## Actions
-The script uses [`sips`](https://ss64.com/osx/sips.html). It runs on all `.jpg` and `.JPG` files in the folder and deposits the new images in a `borderized/` folder. They new images are named `{originalFileName}_borderized_optionalMatColour.jpg`. The original images are not deleted.
+The script uses [`sips`](https://ss64.com/osx/sips.html). It runs on all `.jpg` and `.JPG` files in the folder and deposits the new images in a `borderized/` folder. They new images are named `{originalFileName}_borderized_optionalMatColour.jpg`. The original images are not deleted. EXIF data is preserved in the borderized versions.
 
 For landscape-oriented images, the top- and bottom-borders are set to 15% of the height of the original (the new height is set to 1.3 times the original height), and the left- and right-borders are set to 3.5% of the height of the original (the new width is set to 1.07 times the original width). The top and bottom borders are wider than the side borders.
 
