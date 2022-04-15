@@ -1,6 +1,8 @@
 # borderize 
 borderize is a script that adds matting (a border) to images, which makes them fancy 💁‍♂️.
 
+![2021_11_22_20211030_DSCF7297__35_borderized_match](https://user-images.githubusercontent.com/17396560/163601446-a7e5ff05-a8fe-4e1b-a505-bccffcff50d3.jpg)
+
 ## Actions
 The script runs on all `.jpg` and `.JPG` files in the folder and deposits the new images in a `borderized/` folder. 
 
@@ -8,7 +10,9 @@ For landscape-oriented images, the top- and bottom-borders are set to 1.3 times 
 
 For portrait-oriented images, the top- and bottom-borders are set to 1.07 times the height, and the left- and right-borders are width 1.3 times the width. The side borders are wider than the top borders.
 
-Mat colour can be selected, but it defaults to `#FFFFFF` white.
+For square images, all borders are set to 1.07 times the height.
+
+The default mat colour is `#FFFFFF` white; a number of other options exist.
 
 ## Run borderize
 1. Add `borderize.sh` to a folder in your `$PATH`
@@ -28,6 +32,7 @@ The currently available colours are:
 [aquamarine]="7fffd4"
 [azure]="f0ffff"
 [beige]="f5f5dc"
+
 [bisque]="ffe4c4"
 [black]="000000"
 [blanchedalmond]="ffebcd"
