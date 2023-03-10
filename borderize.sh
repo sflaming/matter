@@ -2,10 +2,10 @@
 
 # Help here: https://superuser.com/questions/241212/how-do-you-use-sips-at-the-terminal-to-resize-an-image-without-upscaling
 
-wide_border=1.3
-narrow_border=1.07
-border_color=FFFFFF
-mkdir -p ./borderized # Create the output folder, if it doesn't already exist
+WIDE_FRAME=1.3
+NARROW_FRAME=1.07
+FRAME_COLOUR=FFFFFF
+mkdir -p ./framed # Create the output folder, if it doesn't already exist
 
 # define the colours
 declare -A colour
@@ -157,82 +157,75 @@ colour[white]="ffffff"
 colour[whitesmoke]="f5f5f5"
 colour[yellow]="ffff00"
 colour[yellowgreen]="9acd32"
-# echo $colour[$1]
-# echo $colour[springgreen]
 
-for file in *.[jJ][pP][gG] # .jpg extension, case insensitive
+for file in *.[jJ][pP][gG] # .jpg extension, case insensitive TODO: make work for other file types.
 do
 	if ! [ "$1" ]
 		then
-			border_color=FFFFFF
+			FRAME_COLOUR=FFFFFF
 		elif [ "$1" = "dark" ]
 			then
-			border_color=121212
+			FRAME_COLOUR=121212
 		elif [ "$1" = "pale" ]
 			then
-			border_color=F8EDEB
+			FRAME_COLOUR=F8EDEB
 		elif [ "$1" = "mint" ]
 			then
-			border_color=D8E2DC
+			FRAME_COLOUR=D8E2DC
 		elif [ "$1" = "mute" ]
 			then
-			border_color=E8E8E4
+			FRAME_COLOUR=E8E8E4
 		elif [ "$1" = "peach" ]
 			then
-			border_color=FFD7BA
+			FRAME_COLOUR=FFD7BA
 		elif [ "$1" = "orange" ]
 			then
-			border_color=FEC89A
+			FRAME_COLOUR=FEC89A
 		elif [ "$1" = "forest" ]
 			then
-			border_color=6B705C
+			FRAME_COLOUR=6B705C
 		elif [ "$1" = "greyn" ]
 			then
-			border_color=B7B7A4
-		# elif [ ${(P)+${:-${colour}[$1]}} ] # Technique to check associative array from https://unix.stackexchange.com/a/573660
-		# 	then
-		# 	border_color=$colour[$1]
+			FRAME_COLOUR=B7B7A4
 		elif [ "$1" = "dom" ]
 			then
-			extracted_color=$(dominantcolor.sh -n 2 $file)
+			extracted_color=$(dominantcolor.sh -n 2 $file) # if you want to use `dom` option get the script from http://www.fmwconcepts.com/imagemagick/dominantcolor/index.php
 			echo "Dominant colour: ${extracted_color:1}"
-			border_color=${extracted_color:1}
+			FRAME_COLOUR=${extracted_color:1}
 		elif [ "$1" = "match" ]
 			then
-			border_color=$(convert $file -colorspace rgb -scale 1x1 -depth 8 rgb: | xxd -p -c3) # from https://stackoverflow.com/questions/48300657/get-only-hex-values-from-imagemagick
+			FRAME_COLOUR=$(convert $file -colorspace rgb -scale 1x1 -depth 8 rgb: | xxd -p -c3) # from https://stackoverflow.com/questions/48300657/get-only-hex-values-from-imagemagick
 		elif [ ${(P)+${:-${colour}[$1]}} ] # Technique to check associative array from https://unix.stackexchange.com/a/573660
 			then
-			border_color=$colour[$1]
+			FRAME_COLOUR=$colour[$1]
 	fi
 	echo "converting $file..."
 	HEIGHT=$(sips -g pixelHeight $file | grep -o '[0-9]*$') # grep the number, otherwise it's a string with numbers
 	WIDTH=$(sips -g pixelWidth $file | grep -o '[0-9]*$')
-	if [[ $WIDTH -gt $HEIGHT ]]; then
-		FINAL_HEIGHT=$(( $HEIGHT * $wide_border ))
-		FINAL_WIDTH=$(( $WIDTH * $narrow_border ))
+	if [[ $WIDTH -gt $HEIGHT ]]; then  # Width is greater than Height
+		FINAL_HEIGHT=$(( $HEIGHT * $WIDE_FRAME ))
+		FINAL_WIDTH=$(( $WIDTH * $NARROW_FRAME ))
 		GREATEST=$WIDTH
-		# echo 'Width is greater than Height'
-	elif [[ $WIDTH -lt $HEIGHT ]]; then
-		FINAL_HEIGHT=$(( $HEIGHT * $narrow_border ))
-		FINAL_WIDTH=$(( $WIDTH * $wide_border ))
+	elif [[ $WIDTH -lt $HEIGHT ]]; then  # Height is greater than Width
+		FINAL_HEIGHT=$(( $HEIGHT * $NARROW_FRAME ))
+		FINAL_WIDTH=$(( $WIDTH * $WIDE_FRAME ))
 		GREATEST=$HEIGHT
-		# echo 'Height is greater than Width'
-	else
-		FINAL_HEIGHT=$(( $HEIGHT * $narrow_border ))
-		FINAL_WIDTH=$(( $WIDTH * $narrow_border ))
+	else  # Image is a square
+		FINAL_HEIGHT=$(( $HEIGHT * $WIDE_FRAME ))
+		FINAL_WIDTH=$(( $WIDTH * $NARROW_FRAME ))
 		GREATEST=$HEIGHT
-		# echo 'Image is a square'
 	fi
 
 	if [ -n "$1" ]; then
-			sips -Z $GREATEST -p $FINAL_HEIGHT $FINAL_WIDTH --padColor $border_color -i $file --out ./borderized/${file%.*}_borderized_${1}.jpg
+			sips -Z $GREATEST -p $FINAL_HEIGHT $FINAL_WIDTH --padColor $FRAME_COLOUR -i $file --out ./framed/${file%.*}_framed_${1}.jpg
 		else
-			sips -Z $GREATEST -p $FINAL_HEIGHT $FINAL_WIDTH --padColor $border_color -i $file --out ./borderized/${file%.*}_borderized.jpg
+			sips -Z $GREATEST -p $FINAL_HEIGHT $FINAL_WIDTH --padColor $FRAME_COLOUR -i $file --out ./framed/${file%.*}_framed.jpg
 
 	fi
 
 	
-	echo "$file borderized."
+	echo "$file framed."
 done
 
 # Colours from d3Plus, https://cdn.jsdelivr.net/npm/d3plus-text@1
+
