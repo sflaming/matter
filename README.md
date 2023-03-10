@@ -10,7 +10,7 @@ borderize is a script that adds matting (a border) to images, which makes them f
 ## How to use it
 1. Add `borderize.sh` to a folder in your `$PATH`
 2. `cd` to a folder with images to borderize
-3. `bordersize.sh` to borderize with the default colour, or add an available colour to the command.
+3. `bordersize.sh` to borderize with the default colour, or add an available colour to the command, or use `dom` or `match` to extract a colour from the image.
 
 For example, 
 ```
@@ -193,5 +193,8 @@ Two additional options exist, which extract a colour from the image in slightly 
 ["dom"]
 ["match"]
 ```
+> **Note**
+> To use `dom`, you'll need to download the `dominantcolor.sh` script from http://www.fmwconcepts.com/imagemagick/dominantcolor/index.php and place it in the same folder as `borderize.sh` script.
+
 
 Sample image ©2022 Symon Flaming
