@@ -1,5 +1,5 @@
 # matter 
-matter is a zsh script that adds matting (a border) to images, which makes them fancy 💁‍♂️.
+matter is a zsh script that adds a mat (a border) to images, which makes them fancy 💁‍♂️.
 
 ## Right??
 ![2021_11_22_20211030_DSCF7297__35_borderized_match](https://user-images.githubusercontent.com/17396560/163601446-a7e5ff05-a8fe-4e1b-a505-bccffcff50d3.jpg)
@@ -194,7 +194,7 @@ dom
 match
 ```
 > **Note**
-> To use `dom`, you'll need to download the `dominantcolor.sh` script from http://www.fmwconcepts.com/imagemagick/dominantcolor/index.php and place it in the same folder as `matter.sh` script.
+> To use `dom`, you'll need to download the `dominantcolor.sh` script from http://www.fmwconcepts.com/imagemagick/dominantcolor/index.php and place it in the same folder as `matter.sh` script. That script uses [ImageMagick](https://github.com/ImageMagick/ImageMagick)
 
 
 Sample image ©2022 sflaming
