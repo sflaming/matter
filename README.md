@@ -1,5 +1,5 @@
-# borderize 
-borderize is a script that adds matting (a border) to images, which makes them fancy 💁‍♂️.
+# matter 
+matter is a zsh script that adds matting (a border) to images, which makes them fancy 💁‍♂️.
 
 ## Right??
 ![2021_11_22_20211030_DSCF7297__35_borderized_match](https://user-images.githubusercontent.com/17396560/163601446-a7e5ff05-a8fe-4e1b-a505-bccffcff50d3.jpg)
@@ -8,21 +8,21 @@ borderize is a script that adds matting (a border) to images, which makes them f
 - `sips`
 
 ## How to use it
-1. Add `borderize.sh` to a folder in your `$PATH`
+1. Add `matter.sh` to a folder in your `$PATH`. Optionally, give it an easy alias in your .zshrc file, like `alias mat='matter.sh'`. 
 2. `cd` to a folder with images to borderize
-3. `bordersize.sh` to borderize with the default colour, or add an available colour to the command, or use `dom` or `match` to extract a colour from the image.
+3. `matter.sh` to borderize with the default colour `#FFFFFF`, or add an available colour to the command, or use `dom` or `match` to extract a colour from the image.
 
 For example, 
 ```
-$ borderize.sh mintcream
+$ matter.sh mintcream
 ```
 
 ## Actions
-The script uses [`sips`](https://ss64.com/osx/sips.html). It runs on all `.jpg` and `.JPG` files in the folder and deposits the new images in a `borderized/` folder. They new images are named `{originalFileName}_borderized_optionalMatColour.jpg`. The original images are not deleted. EXIF data is preserved in the borderized versions.
+The script uses [`sips`](https://ss64.com/osx/sips.html). It runs on all `.jpg` and `.JPG` files in the folder and saves new, framed images to a folder `./framed` in the same directoy as the original images. They new images are named `{originalFileName}_framed[_optionalMatColour].jpg`. The original images are not deleted. EXIF data is preserved in the framed versions.
 
-For landscape-oriented images, the top- and bottom-borders are set to 15% of the height of the original (the new height is set to 1.3 times the original height), and the left- and right-borders are set to 3.5% of the height of the original (the new width is set to 1.07 times the original width). The top and bottom borders are wider than the side borders.
+For landscape-oriented images, the top- and bottom-borders are wider than the sides. They're set to 15% of the height of the original (the new height is set to 1.3 times the original height), and the left- and right-borders are set to 3.5% of the height of the original (the new width is set to 1.07 times the original width). The top and bottom borders are wider than the side borders.
 
-For portrait-oriented images, the top- and bottom-borders are set to 3.5% of the height of the original (the new height is set to 1.07 times the original height). The left- and right-borders are set to 15% of the width of the original (the new width is to 1.3 times the original width). The side borders are wider than the top borders.
+For portrait-oriented images, the top- and bottom-borders will each be 3.5% of the height of the original (as the new height is set to be 1.07 times the original height). The left- and right-borders will each be 15% of the width of the original (as the new width is set to be 1.3 times the original width). The side borders are wider than the top borders.
 
 For square images, all borders are set to 3.5% of the height of the original.
 
@@ -188,13 +188,13 @@ The default mat colour is `#FFFFFF` white; a number of other options exist.
 ["greyn"]r="B7B7A4"
 ```
 
-Two additional options exist, which extract a colour from the image in slightly different ways. Experiment to see which works best for your image. The sample image was generated using `dom`:
+Two additional options exist, which extract the 'main' colour from the image in slightly different ways. Experiment to see which works best for your image. The sample image was generated using `dom`:
 ```
-["dom"]
-["match"]
+dom
+match
 ```
 > **Note**
-> To use `dom`, you'll need to download the `dominantcolor.sh` script from http://www.fmwconcepts.com/imagemagick/dominantcolor/index.php and place it in the same folder as `borderize.sh` script.
+> To use `dom`, you'll need to download the `dominantcolor.sh` script from http://www.fmwconcepts.com/imagemagick/dominantcolor/index.php and place it in the same folder as `matter.sh` script.
 
 
-Sample image ©2022 Symon Flaming
+Sample image ©2022 sflaming
